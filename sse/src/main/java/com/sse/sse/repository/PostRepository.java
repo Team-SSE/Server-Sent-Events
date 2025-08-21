@@ -32,7 +32,7 @@ public class PostRepository {
                 posts.add((Post) ois.readObject());
             }
         } catch (EOFException e) {
-            System.out.println("===== 게시물 불러오기 성공 =====");
+//            System.out.println("===== 게시물 불러오기 성공 =====");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -61,6 +61,7 @@ public class PostRepository {
             oos.flush();
 
             posts.clear();
+
             loadPosts();
 
             result = 1;

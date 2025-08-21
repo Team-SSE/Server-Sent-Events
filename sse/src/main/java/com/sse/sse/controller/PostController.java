@@ -13,24 +13,39 @@ public class PostController {
     }
 
     public void registPost() {
-        System.out.println("===== 게시물 등록 =====");
+        System.out.println("게시물 등록을 시작합니다.");
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("제목을 입력하세요: ");
-        String title = sc.nextLine();
-
-        System.out.print("내용을 입력하세요: ");
-        String content = sc.nextLine();
+        String title = inputText("게시물 제목을 입력해주세요: ");
+        String content = inputText("게시물 내용을 입력해주세요: ");
 
         CreatePostDto requestDto = new CreatePostDto(title, content);
 
         int result = postService.registPost(requestDto);
 
         if (result >= 1) {
-            System.out.println("게시물 성공적으로 등록되었습니다.");
+            System.out.println("게시물 성공적으로 등록되었습니다!");
         } else {
-            System.out.println("게시물 등록에 실패했습니다.");
+            System.out.println("게시물 등록에 실패했습니다. 다시 시도해주세요.");
         }
+    }
+
+    private String inputText(String message) {
+        Scanner sc = new Scanner(System.in);
+        String input = null;
+
+        while (true) {
+            System.out.print(message);
+            input = sc.nextLine();
+
+            if (input.trim().length() != 0) {
+                break;
+            }
+
+            System.out.println("입력되지 않았습니다. 다시 입력해주세요.");
+        }
+
+        return input;
     }
 }
