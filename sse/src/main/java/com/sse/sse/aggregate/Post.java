@@ -10,18 +10,18 @@ public class Post implements Serializable {
     private String title;
     private String content;
     private LocalDateTime createdAt;
-    private Long memberId;
-    private List<Long> likes;
+    private Member member;
+    private List<Member> likes;
 
     public Post() {
     }
 
-    public Post(Long id, String title, String content, Long memberId) {
+    public Post(Long id, String title, String content, Member member) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
-        this.memberId = memberId;
+        this.member = member;
         this.likes = new ArrayList<>();
     }
 
@@ -49,19 +49,19 @@ public class Post implements Serializable {
         return createdAt;
     }
 
-    public Long getMemberId() {
-        return memberId;
+    public Member getMember() {
+        return member;
     }
 
-    public List<Long> getLikes() {
+    public List<Member> getLikes() {
         return likes;
     }
 
-    public void addLikes(Long memberId) {
+    public void addLikes(Member member) {
         if (this.likes == null) {
             this.likes = new ArrayList<>();
         }
-        this.likes.add(memberId);
+        this.likes.add(member);
     }
 
     @Override
@@ -71,8 +71,8 @@ public class Post implements Serializable {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", createdAt=" + createdAt +
-                ", memberId=" + memberId +
-                ", likes=" + likes +
+                ", member=" + member +
+                ", likesCount=" + likes.size() +
                 '}';
     }
 }

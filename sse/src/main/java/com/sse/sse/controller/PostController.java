@@ -22,7 +22,8 @@ public class PostController {
 
         CreatePostDto requestDto = new CreatePostDto(title, content);
 
-        int result = postService.registPost(requestDto);
+        // TODO null 대신 로그인한 회원으로 변경 필요
+        int result = postService.registPost(null, requestDto);
 
         if (result >= 1) {
             System.out.println("게시물 성공적으로 등록되었습니다!");
