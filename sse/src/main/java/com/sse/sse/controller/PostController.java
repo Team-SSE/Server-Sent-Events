@@ -17,8 +17,8 @@ public class PostController {
 
         Scanner sc = new Scanner(System.in);
 
-        String title = inputText("게시물 제목을 입력해주세요: ");
-        String content = inputText("게시물 내용을 입력해주세요: ");
+        String title = inputText("제목", "제목을 입력해주세요: ");
+        String content = inputText("내용", "내용을 입력해주세요: ");
 
         CreatePostDto requestDto = new CreatePostDto(title, content);
 
@@ -31,19 +31,19 @@ public class PostController {
         }
     }
 
-    private String inputText(String message) {
+    private String inputText(String target, String inputMessage) {
         Scanner sc = new Scanner(System.in);
         String input = null;
 
         while (true) {
-            System.out.print(message);
+            System.out.print(inputMessage);
             input = sc.nextLine();
 
             if (input.trim().length() != 0) {
                 break;
             }
 
-            System.out.println("입력되지 않았습니다. 다시 입력해주세요.");
+            System.out.println(target + "(이)가 입력되지 않았습니다. 다시 입력해주세요.");
         }
 
         return input;
