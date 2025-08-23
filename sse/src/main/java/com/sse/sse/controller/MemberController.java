@@ -1,30 +1,22 @@
 package com.sse.sse.controller;
 
+import com.sse.sse.common.MyUtil;
 import com.sse.sse.dto.member.SignupDto;
 import com.sse.sse.service.MemberService;
-
-import java.util.Scanner;
 
 public class MemberController {
     private static final MemberService memberService = new MemberService();
     public void signup() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("어서오세요. 회원 가입을 진행합니다!");
+        System.out.println("회원가입을 시작합니다.");
 
         String email = "";
         while(true) {
-            System.out.print("이메일 입력: ");
-            email = sc.nextLine();
+            email = MyUtil.checkInputText("이메일", "이메일을 입력해주세요: ");
             if (!memberService.isDuplicateEmail(email)) break;
             System.out.println("중복된 이메일입니다.");
         }
-
-        System.out.print("비밀번호 입력: ");
-        String password = sc.nextLine();
-
-        System.out.print("닉네임 입력: ");
-        String nickname = sc.nextLine();
+        String password = MyUtil.checkInputText("비밀번호", "비밀번호를 입력해주세요: ");
+        String nickname = MyUtil.checkInputText("닉네임", "닉네임을 입력해주세요: ");
 
         SignupDto dto = new SignupDto(email, password, nickname);
 
