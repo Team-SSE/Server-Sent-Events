@@ -6,6 +6,7 @@ import com.sse.sse.config.stream.MyObjectOutput;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PostRepository {
     private static List<Post> posts;
@@ -48,6 +49,12 @@ public class PostRepository {
 
     public List<Post> findAllPosts() {
         return posts;
+    }
+
+    public Optional<Post> findPostById(final Long id) {
+        return posts.stream()
+                .filter(post -> post.getId().equals(id))
+                .findFirst();
     }
 
     public int registPost(final Post post) {

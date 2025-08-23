@@ -1,10 +1,13 @@
 package com.sse.sse.controller;
 
+import com.sse.sse.aggregate.Post;
 import com.sse.sse.dto.CreatePostDto;
+import com.sse.sse.dto.response.PostDetailResponseDto;
 import com.sse.sse.dto.response.PostResponseDto;
 import com.sse.sse.service.PostService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -38,12 +41,32 @@ public class PostController {
 
         final List<PostResponseDto> responseDto = postService.findAllPosts().stream()
                 .map(PostResponseDto::of)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toList());
 
         if (responseDto.isEmpty()) {
             System.out.println("아직 등록된 게시물이 없습니다.");
         } else {
             responseDto.forEach(System.out::println);
+        }
+    }
+
+    public void findPostById() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("조회할 게시물의 ID를 입력하세요: ");
+
+        try {
+            final long input = sc.nextLong();
+
+            final Optional<Post> post = postService.findPostById(input);
+
+            if (post.isPresent()) {
+                System.out.println(PostDetailResponseDto.of(post.get()));
+            } else {
+                System.out.println("해당 ID의 게시물을 찾을 수 없습니다.");
+            }
+        } catch (Exception e) {
+            System.out.println("게시물 조회 중 오류가 발생했습니다. 입력 값을 확인하거나 다시 시도해 주세요.");
         }
     }
 
