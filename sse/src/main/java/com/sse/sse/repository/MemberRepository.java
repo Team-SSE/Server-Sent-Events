@@ -27,7 +27,7 @@ public class MemberRepository {
                 memberList.add((Member) ois.readObject());
             }
         } catch (EOFException e) {
-            System.out.println("회원 정보 읽어오기 완료!");
+//            System.out.println("회원 정보 읽어오기 완료!");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -60,7 +60,6 @@ public class MemberRepository {
                 oos = new MyObjectOutput(new BufferedOutputStream(new FileOutputStream(file, true)));
             }
 
-
             oos.writeObject(newMember);
             oos.flush();
 
@@ -79,5 +78,4 @@ public class MemberRepository {
 
         return result;
     }
-
 }
