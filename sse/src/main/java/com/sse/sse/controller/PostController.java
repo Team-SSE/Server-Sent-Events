@@ -1,9 +1,12 @@
 package com.sse.sse.controller;
 
 import com.sse.sse.dto.CreatePostDto;
+import com.sse.sse.dto.response.PostResponseDto;
 import com.sse.sse.service.PostService;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class PostController {
     private final PostService postService;
@@ -27,6 +30,20 @@ public class PostController {
             System.out.println("게시물 성공적으로 등록되었습니다!");
         } else {
             System.out.println("게시물 등록에 실패했습니다. 다시 시도해주세요.");
+        }
+    }
+
+    public void findAllPosts() {
+        System.out.println("등록된 게시물 목록입니다.");
+
+        final List<PostResponseDto> responseDto = postService.findAllPosts().stream()
+                .map(PostResponseDto::of)
+                .collect(Collectors.toUnmodifiableList());
+
+        if (responseDto.isEmpty()) {
+            System.out.println("아직 등록된 게시물이 없습니다.");
+        } else {
+            responseDto.forEach(System.out::println);
         }
     }
 

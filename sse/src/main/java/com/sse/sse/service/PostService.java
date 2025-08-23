@@ -5,6 +5,8 @@ import com.sse.sse.aggregate.Post;
 import com.sse.sse.dto.CreatePostDto;
 import com.sse.sse.repository.PostRepository;
 
+import java.util.List;
+
 public class PostService {
     private final PostRepository postRepository;
 
@@ -18,5 +20,9 @@ public class PostService {
         final Post post = new Post(id, requestDto.getTitle(), requestDto.getContent(), member);
 
         return postRepository.registPost(post);
+    }
+
+    public List<Post> findAllPosts() {
+        return postRepository.findAllPosts();
     }
 }
