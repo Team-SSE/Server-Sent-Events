@@ -46,7 +46,7 @@ public class PostRepository {
         return (posts.isEmpty()) ? -1 : posts.get(posts.size() - 1).getId();
     }
 
-    public int registPost(Post post) {
+    public int registPost(final Post post) {
         ObjectOutputStream oos = null;
         int result = 0;
 

@@ -16,7 +16,7 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(Long id, String title, String content, Member member) {
+    public Post(final Long id, final String title, final String content, final Member member) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -33,7 +33,7 @@ public class Post implements Serializable {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -41,12 +41,16 @@ public class Post implements Serializable {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(final String content) {
         this.content = content;
     }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public void setMember(final Member member) {
+        this.member = member;
     }
 
     public Member getMember() {
@@ -57,7 +61,7 @@ public class Post implements Serializable {
         return likes;
     }
 
-    public void addLikes(Member member) {
+    public void addLikes(final Member member) {
         if (this.likes == null) {
             this.likes = new ArrayList<>();
         }

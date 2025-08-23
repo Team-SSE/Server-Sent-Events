@@ -12,7 +12,7 @@ public class PostService {
         postRepository = new PostRepository();
     }
 
-    public int registPost(Member member, CreatePostDto requestDto) {
+    public int registPost(final Member member, final CreatePostDto requestDto) {
         final Long id = postRepository.findLastPost() + 1;
 
         final Post post = new Post(id, requestDto.getTitle(), requestDto.getContent(), member);
