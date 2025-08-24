@@ -4,10 +4,13 @@ import com.sse.sse.aggregate.Member;
 import com.sse.sse.config.stream.MyObjectOutput;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MemberRepository {
     private final ArrayList<Member> memberList = new ArrayList<>();
+    private static final ConcurrentHashMap<Long, LocalDateTime> signedInMember = new ConcurrentHashMap<>();
     private final File file
             = new File("src/main/java/com/sse/sse/db/member.dat");
 
@@ -77,5 +80,10 @@ public class MemberRepository {
         }
 
         return result;
+    }
+
+    public void putSignedInMember(Long attemptMemberId) {
+        signedInMember.put(attemptMemberId, LocalDateTime.now());
+        System.out.println(signedInMember);
     }
 }
