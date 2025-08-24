@@ -55,11 +55,9 @@ public class MemberService {
     public boolean signOut(final String email) {
         Long memberId = getMemberId(email);
 
-        if(memberId > 0) {
-            if(memberRepository.getSignedInTime(memberId) != null) {
-                memberRepository.removeSignedInMember(memberId);
-                return true;
-            }
+        if(memberRepository.getSignedInTime(memberId) != null) {
+            memberRepository.removeSignedInMember(memberId);
+            return true;
         }
 
         return false;
