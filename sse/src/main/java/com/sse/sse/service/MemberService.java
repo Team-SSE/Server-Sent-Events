@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class MemberService {
     private final MemberRepository memberRepository = new MemberRepository();
 
-    public boolean isDuplicateEmail(String inputEmail) {
+    public Long getMemberId(String inputEmail) {
         ArrayList<Member> memberList = memberRepository.findAllMembers();
         for (Member member : memberList) {
             if(member.getEmail().equals(inputEmail)) {
-                return true;
+                return member.getId();
             }
         }
-        return false;
+        return -1L;
     }
 
     public int signup(SignupDto dto) {

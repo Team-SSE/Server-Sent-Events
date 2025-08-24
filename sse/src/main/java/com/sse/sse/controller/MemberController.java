@@ -12,7 +12,7 @@ public class MemberController {
         String email = "";
         while(true) {
             email = MyUtil.checkInputText("이메일", "이메일을 입력해주세요: ");
-            if (!memberService.isDuplicateEmail(email)) break;
+            if (memberService.getMemberId(email) < 0) break;
             System.out.println("중복된 이메일입니다.");
         }
         String password = MyUtil.checkInputText("비밀번호", "비밀번호를 입력해주세요: ");
