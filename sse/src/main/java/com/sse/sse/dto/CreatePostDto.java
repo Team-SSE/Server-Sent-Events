@@ -7,7 +7,7 @@ public class CreatePostDto {
     public CreatePostDto() {
     }
 
-    public CreatePostDto(String title, String content) {
+    public CreatePostDto(final String title, final String content) {
         this.title = title;
         this.content = content;
     }
