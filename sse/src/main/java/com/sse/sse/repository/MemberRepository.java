@@ -52,7 +52,7 @@ public class MemberRepository {
         return result;
     }
 
-    public int signup(Member newMember) {
+    public int signup(final Member newMember) {
         ObjectOutputStream oos = null;
         int result = 0;
 
@@ -82,16 +82,16 @@ public class MemberRepository {
         return result;
     }
 
-    public void putSignedInMember(Long attemptMemberId) {
+    public void putSignedInMember(final Long attemptMemberId) {
         signedInMember.put(attemptMemberId, LocalDateTime.now());
 //        System.out.println(signedInMember);
     }
 
-    public LocalDateTime getSignedInTime(Long memberId) {
+    public LocalDateTime getSignedInTime(final Long memberId) {
         return signedInMember.get(memberId);
     }
 
-    public void removeSignedInMember(Long memberId) {
+    public void removeSignedInMember(final Long memberId) {
         signedInMember.remove(memberId);
 //        System.out.println(signedInMember);
     }

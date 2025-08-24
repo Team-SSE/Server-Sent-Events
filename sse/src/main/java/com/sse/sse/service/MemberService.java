@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class MemberService {
     private final MemberRepository memberRepository = new MemberRepository();
 
-    public Long getMemberId(String inputEmail) {
+    public Long getMemberId(final String inputEmail) {
         ArrayList<Member> memberList = memberRepository.findAllMembers();
         for (Member member : memberList) {
             if(member.getEmail().equals(inputEmail)) {
@@ -22,7 +22,7 @@ public class MemberService {
         return -1L;
     }
 
-    public int signup(SignupDto dto) {
+    public int signup(final SignupDto dto) {
         Long newMemberId = memberRepository.getLastMemberId() + 1;
         Member newMember = new Member(
                 newMemberId,
@@ -35,7 +35,7 @@ public class MemberService {
         return memberRepository.signup(newMember);
     }
 
-    public Long signIn(SignInDto dto) {
+    public Long signIn(final SignInDto dto) {
         Long result = -1L;
 
         ArrayList<Member> memberList = memberRepository.findAllMembers();
@@ -48,11 +48,11 @@ public class MemberService {
         return result;
     }
 
-    public void putSignedInMember(Long attemptMemberId) {
+    public void putSignedInMember(final Long attemptMemberId) {
         memberRepository.putSignedInMember(attemptMemberId);
     }
 
-    public boolean signOut(String email) {
+    public boolean signOut(final String email) {
         Long memberId = getMemberId(email);
 
         if(memberId > 0) {
