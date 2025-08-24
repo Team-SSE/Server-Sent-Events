@@ -45,4 +45,16 @@ public class MemberController {
         }
     }
 
+    public void signOut() {
+        System.out.println("로그아웃을 시작합니다.");
+
+        String email = MyUtil.checkInputText("이메일", "이메일을 입력해주세요: ");
+        if(memberService.getMemberId(email) < 0) {
+            System.out.println("회원이 아닙니다.");
+        } else if(!memberService.signOut(email)) {
+            System.out.println("현재 로그인 상태가 아닙니다.");
+        } else {
+            System.out.println("로그아웃에 성공하였습니다.");
+        }
+    }
 }

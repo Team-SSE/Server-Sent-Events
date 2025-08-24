@@ -84,6 +84,15 @@ public class MemberRepository {
 
     public void putSignedInMember(Long attemptMemberId) {
         signedInMember.put(attemptMemberId, LocalDateTime.now());
-        System.out.println(signedInMember);
+//        System.out.println(signedInMember);
+    }
+
+    public LocalDateTime getSignedInTime(Long memberId) {
+        return signedInMember.get(memberId);
+    }
+
+    public void removeSignedInMember(Long memberId) {
+        signedInMember.remove(memberId);
+//        System.out.println(signedInMember);
     }
 }

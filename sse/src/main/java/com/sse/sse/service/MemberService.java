@@ -6,6 +6,7 @@ import com.sse.sse.dto.member.SignInDto;
 import com.sse.sse.dto.member.SignupDto;
 import com.sse.sse.repository.MemberRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MemberService {
@@ -49,5 +50,18 @@ public class MemberService {
 
     public void putSignedInMember(Long attemptMemberId) {
         memberRepository.putSignedInMember(attemptMemberId);
+    }
+
+    public boolean signOut(String email) {
+        Long memberId = getMemberId(email);
+
+        if(memberId > 0) {
+            if(memberRepository.getSignedInTime(memberId) != null) {
+                memberRepository.removeSignedInMember(memberId);
+                return true;
+            }
+        }
+
+        return false;
     }
 }
