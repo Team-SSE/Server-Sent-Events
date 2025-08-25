@@ -8,7 +8,7 @@ public class SignupDto {
     public SignupDto() {
     }
 
-    public SignupDto(String email, String password, String nickname) {
+    public SignupDto(final String email, final String password, final String nickname) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;

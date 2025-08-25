@@ -7,7 +7,7 @@ public class SignInDto {
     public SignInDto() {
     }
 
-    public SignInDto(String email, String password) {
+    public SignInDto(final String email, final String password) {
         this.email = email;
         this.password = password;
     }
