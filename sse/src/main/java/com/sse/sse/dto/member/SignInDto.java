@@ -1,17 +1,15 @@
 package com.sse.sse.dto.member;
 
-public class SignupDto {
+public class SignInDto {
     private String email;
     private String password;
-    private String nickname;
 
-    public SignupDto() {
+    public SignInDto() {
     }
 
-    public SignupDto(final String email, final String password, final String nickname) {
+    public SignInDto(final String email, final String password) {
         this.email = email;
         this.password = password;
-        this.nickname = nickname;
     }
 
     public String getEmail() {
@@ -20,9 +18,5 @@ public class SignupDto {
 
     public String getPassword() {
         return password;
-    }
-
-    public String getNickname() {
-        return nickname;
     }
 }
