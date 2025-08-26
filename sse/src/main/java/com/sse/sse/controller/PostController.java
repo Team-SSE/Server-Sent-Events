@@ -6,6 +6,7 @@ import com.sse.sse.dto.response.PostDetailResponseDto;
 import com.sse.sse.dto.response.PostResponseDto;
 import com.sse.sse.service.PostService;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -67,6 +68,29 @@ public class PostController {
             }
         } catch (Exception e) {
             System.out.println("게시물 조회 중 오류가 발생했습니다. 입력 값을 확인하거나 다시 시도해 주세요.");
+        }
+    }
+
+    public void removePost() {
+        Scanner sc = new Scanner(System.in);
+
+        // TODO 로그인 여부 확인 및 로그인한 사용자가 작성한 게시물인지 확인
+        System.out.print("삭제할 게시물의 ID를 입력해주세요: ");
+
+        try {
+            final long postId = sc.nextLong();
+
+            final Optional<Post> post = postService.findPostById(postId);
+
+            if (post.isPresent()) {
+                int result = postService.removePost(post.get());
+
+                System.out.println((result == 1) ? "게시물 성공적으로 삭제되었습니다." : "게시물 삭제에 실패했습니다. 다시 시도해주세요.");
+            } else {
+                System.out.println("해당 ID의 게시물을 찾을 수 없습니다.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("게시물 삭제 중 오류가 발생했습니다. 입력 값을 확인하거나 다시 시도해 주세요.");
         }
     }
 

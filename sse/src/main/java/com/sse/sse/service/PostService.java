@@ -30,4 +30,8 @@ public class PostService {
     public Optional<Post> findPostById(final Long id) {
         return postRepository.findPostById(id);
     }
+
+    public int removePost(final Post post) {
+        return postRepository.removePost(post);
+    }
 }
