@@ -3,7 +3,7 @@ package com.sse.sse.common;
 import java.util.Scanner;
 
 public class MyUtil {
-    public static String checkInputText(String target, String inputMessage) {
+    public static String checkInputText(final String target, final String inputMessage) {
         Scanner sc = new Scanner(System.in);
         String input = "";
 
