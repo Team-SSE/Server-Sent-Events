@@ -13,6 +13,7 @@ public class PostRepository {
 
     private final static File file = new File("src/main/java/com/sse/sse/db/post.dat");
 
+
     public PostRepository() {
         posts = new ArrayList<>();
 
@@ -25,6 +26,18 @@ public class PostRepository {
         }
 
         loadPosts();
+    }
+
+    public void savePosts() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+            for (Post post : posts) {
+                oos.writeObject(post);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void loadPosts() {
@@ -89,5 +102,22 @@ public class PostRepository {
         }
 
         return result;
+    }
+
+    public int removePost(final Post targetPost) {
+        posts.remove(targetPost);
+        savePosts();
+
+        return 1;
+    }
+
+    public int modifyPost(final Post newPost) {
+        posts.stream()
+                .filter((post) -> post.getId() == post.getId())
+                .map((post) -> post = newPost);
+
+        savePosts();
+
+        return 1;
     }
 }

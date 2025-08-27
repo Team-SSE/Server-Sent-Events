@@ -1,13 +1,13 @@
-package com.sse.sse.dto;
+package com.sse.sse.dto.request;
 
-public class CreatePostDto {
+public class PostRequestDto {
     private String title;
     private String content;
 
-    public CreatePostDto() {
+    public PostRequestDto() {
     }
 
-    public CreatePostDto(final String title, final String content) {
+    public PostRequestDto(final String title, final String content) {
         this.title = title;
         this.content = content;
     }
