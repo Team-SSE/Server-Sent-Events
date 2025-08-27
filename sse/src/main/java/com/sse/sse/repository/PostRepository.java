@@ -28,6 +28,18 @@ public class PostRepository {
         loadPosts();
     }
 
+    public void savePosts() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+            for (Post post : posts) {
+                oos.writeObject(post);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void loadPosts() {
         try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
             while (true) {
@@ -93,43 +105,19 @@ public class PostRepository {
     }
 
     public int removePost(final Post targetPost) {
-        ObjectOutputStream oos = null;
-        int result = 0;
+        posts.remove(targetPost);
+        savePosts();
 
-        try {
-            if (file.exists()) {
-                file.delete();
-            }
+        return 1;
+    }
 
-            file.createNewFile();
+    public int modifyPost(final Post newPost) {
+        posts.stream()
+                .filter((post) -> post.getId() == post.getId())
+                .map((post) -> post = newPost);
 
-            oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file, true)));
+        savePosts();
 
-            posts.remove(targetPost);
-
-            for(Post post : posts) {
-                oos.writeObject(post);
-            }
-
-            oos.flush();
-
-            posts.clear();
-
-            loadPosts();
-
-            result = 1;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (oos != null) {
-                    oos.close();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        return result;
+        return 1;
     }
 }
