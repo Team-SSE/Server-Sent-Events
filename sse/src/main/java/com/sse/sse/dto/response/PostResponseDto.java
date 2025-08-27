@@ -25,7 +25,7 @@ public class PostResponseDto {
     }
 
     public static PostResponseDto of(final Post post) {
-        return new PostResponseDto(post.getId(), post.getTitle(), post.getCreatedAt(),
+        return new PostResponseDto(post.getId() + 1, post.getTitle(), post.getCreatedAt(),
                 (post.getMember() == null) ? "알 수 없음" : post.getMember().getNickname(), post.getLikes().size());
     }
 

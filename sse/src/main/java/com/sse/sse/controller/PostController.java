@@ -59,7 +59,7 @@ public class PostController {
         try {
             final long input = sc.nextLong();
 
-            final Optional<Post> post = postService.findPostById(input);
+            final Optional<Post> post = postService.findPostById(input - 1);
 
             if (post.isPresent()) {
                 System.out.println(PostDetailResponseDto.of(post.get()));
@@ -80,14 +80,14 @@ public class PostController {
         try {
             final long postId = sc.nextLong();
 
-            final Optional<Post> post = postService.findPostById(postId);
+            final Optional<Post> post = postService.findPostById(postId - 1);
 
             if (post.isPresent()) {
                 int result = postService.removePost(post.get());
 
                 System.out.println((result == 1) ? "게시물 성공적으로 삭제되었습니다." : "게시물 삭제에 실패했습니다. 다시 시도해주세요.");
             } else {
-                System.out.println("해당 ID의 게시물을 찾을 수 없습니다.");
+                System.out.println("입력하신 ID의 게시물을 찾을 수 없습니다.");
             }
         } catch (InputMismatchException e) {
             System.out.println("게시물 삭제 중 오류가 발생했습니다. 입력 값을 확인하거나 다시 시도해 주세요.");
@@ -103,7 +103,7 @@ public class PostController {
         try {
             final long postId = sc.nextLong();
 
-            final Optional<Post> post = postService.findPostById(postId);
+            final Optional<Post> post = postService.findPostById(postId - 1);
 
             if (post.isPresent()) {
                 System.out.println("1. 제목만 수정");
